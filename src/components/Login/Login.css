@@ -1,0 +1,16 @@
+input[type='file']{
+    display: none;
+}
+
+label{
+    background-color:rgb(255, 0, 34);
+    color: white;
+    font-size: medium;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+label:active{
+    color: rgb(255, 0, 34);
+    background-color: white;
+}
