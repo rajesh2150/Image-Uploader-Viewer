@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Login.css";
+import "./Upload.css";
 import { storage } from "../FireBase/Firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-const LoginPage = () => {
+const UploadPage = () => {
 
   //file is selected image file
   const [file, setFile] = useState(null);
@@ -71,4 +71,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default UploadPage;
