@@ -14,3 +14,16 @@ label:active{
     color: rgb(255, 0, 34);
     background-color: white;
 }
+.upload-btn{
+    padding: 5px;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.image{
+    width: 200px;
+    height: 200px;
+    object-fit:fill;
+    margin: 10px;
+}
