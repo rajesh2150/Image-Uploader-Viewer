@@ -1,11 +1,14 @@
 import "./App.css";
-import UploadPage from "./components/Login/UploadPage";
+import Authentication from "./components/Authentication/Authentication";
+import UploadPage from "./components/Upload/UploadPage";
 
 function App() {
   return (
     <div className="App">
       
         <UploadPage />
+        <hr/>
+        <Authentication/>
     </div>
   );
 }
