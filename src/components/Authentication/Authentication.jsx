@@ -134,6 +134,7 @@ const Authentication = () => {
   
   return (
     <div>
+      {/* shows user email and profile  */}
       <div style={{display: auth?.currentUser?.email ? "flex" : "none",justifyContent:"center",alignItems:"center"}}>
       <p>{auth?.currentUser?.email}</p>
       <img width={50} style={{borderRadius: "50%"}} src={userProfile ? userProfile : "https://tse4.mm.bing.net/th?id=OIP.eGHa3HgHxIlTHmcvKNDs7AHaGe&pid=Api&P=0&h=180"}/>
@@ -157,6 +158,7 @@ const Authentication = () => {
       </div> */}
 
       <br />
+      {/* SignUp Option */}
       <div style={{ display: !auth?.currentUser ? "block" : "none" }}>
         <input
           type="text"
@@ -179,6 +181,9 @@ const Authentication = () => {
         </button>
       </div>
       <hr/>
+
+      {/* Sign In Option */}
+
       <div className="signIn" style={{display: !auth?.currentUser ? "flex" : "none",justifyContent:"center",alignItems:"center"}}>
         <input type="text" placeholder="Email..." onChange={(e)=>setLoginMail(e.target.value)}/>
         <input type="password" placeholder="Password..." onChange={(e)=>setLoginPassword(e.target.value)}/>
@@ -187,6 +192,8 @@ const Authentication = () => {
       </div>
 
       <hr />
+
+      {/* shows Read List of Movies and Create Update Delete Requires User Auth To Execute  */}
       <div>
         <input
           type="text"
