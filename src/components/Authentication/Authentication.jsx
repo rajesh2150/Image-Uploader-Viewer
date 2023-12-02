@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { auth, googleAuth } from "../FireBase/Firebase";
 import {
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   sendPasswordResetEmail,
@@ -30,6 +31,11 @@ const Authentication = () => {
 
   //update movie title
   const [updatedTitle, setUpdatedTitle] = useState("");
+
+  //sign in state
+  const [loginMail,setLoginMail]=useState('')
+  const [loginPassword,setLoginPassword]=useState('')
+
   const signIn = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
@@ -39,6 +45,18 @@ const Authentication = () => {
       console.log(err);
     }
   };
+
+  const handleSignIn=async()=>{
+    try{
+      await signInWithEmailAndPassword(auth,loginMail,loginPassword)
+      setUser(auth?.currentUser?.email)
+      setUserProfile("https://tse4.mm.bing.net/th?id=OIP.eGHa3HgHxIlTHmcvKNDs7AHaGe&pid=Api&P=0&h=180")
+    }
+    catch(err){
+      console.log(err)
+      alert(err)
+    }
+  }
 
   const signInWithGoogleAuth = async () => {
     try {
@@ -112,26 +130,34 @@ const Authentication = () => {
     await updateDoc(movieDoc, { MovieName: updatedTitle });
     getMovieList();
   };
+
+  
   return (
     <div>
-      <div
+      <div style={{display: auth?.currentUser?.email ? "flex" : "none",justifyContent:"center",alignItems:"center"}}>
+      <p>{auth?.currentUser?.email}</p>
+      <img width={50} style={{borderRadius: "50%"}} src={userProfile ? userProfile : "https://tse4.mm.bing.net/th?id=OIP.eGHa3HgHxIlTHmcvKNDs7AHaGe&pid=Api&P=0&h=180"}/>
+     <button  onClick={()=>handleSignOut()}>Sign Out</button>
+      </div>
+
+      {/* <div
         style={{
-          display: user ? "flex" : "none",
+          display: auth?.currentUser ? "flex" : "none",
           justifyContent: "center",
           alignItems: "center",
         }}>
         <p style={{ display: "inline-block", margin: 0 }}>{user}</p>
         <img
-          src={userProfile}
+         
           width={50}
           style={{ borderRadius: "50%", margin: "4px" }}
           alt="Userimage"
         />
         {user ? <button onClick={() => handleSignOut()}>Sign Out</button> : ""}
-      </div>
+      </div> */}
 
       <br />
-      <div style={{ display: !user ? "block" : "none" }}>
+      <div style={{ display: !auth?.currentUser ? "block" : "none" }}>
         <input
           type="text"
           placeholder="Email"
@@ -144,14 +170,20 @@ const Authentication = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={() => forgetPassword()}>Forgot Password</button>
         <button disabled={user} onClick={() => signIn()}>
-          Sign In
+          Sign Up
         </button>
         <br />
         <button onClick={() => signInWithGoogleAuth()}>
           Sign in With Google
         </button>
+      </div>
+      <hr/>
+      <div className="signIn" style={{display: !auth?.currentUser ? "flex" : "none",justifyContent:"center",alignItems:"center"}}>
+        <input type="text" placeholder="Email..." onChange={(e)=>setLoginMail(e.target.value)}/>
+        <input type="password" placeholder="Password..." onChange={(e)=>setLoginPassword(e.target.value)}/>
+        <button onClick={()=>handleSignIn()}>Sign In</button>
+        <button onClick={() => forgetPassword()}>Forgot Password</button>
       </div>
 
       <hr />
